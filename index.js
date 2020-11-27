@@ -58,19 +58,6 @@ const LaunchRequest_Handler = {
     */
     // const { userId } = handlerInput.requestEnvelope.context.System.user;
     let didpost;
-    axios
-      .post("/", {
-        Id: 78912,
-        Customer: "Jason Sweet",
-        Quantity: 1,
-        Price: 18.0,
-      })
-      .then((res) => {
-        didpost = res.data;
-      })
-      .catch((err) => {
-        didpost = res.data;
-      });
 
     let speechText = "";
 
@@ -87,6 +74,19 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
+          axios
+            .post("https://reqbin.com/echo/post/json", {
+              Id: 78912,
+              Customer: "Jason Sweet",
+              Quantity: 1,
+              Price: 18.0,
+            })
+            .then((res) => {
+              didpost = res.data;
+            })
+            .catch((err) => {
+              didpost = res.data;
+            });
           speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
