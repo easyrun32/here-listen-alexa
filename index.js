@@ -68,52 +68,33 @@ const LaunchRequest_Handler = {
         .withLinkAccountCard()
         .getResponse();
     } else {
-      // let didpost;
-      // axios
-      //   .post("https://reqbin.com/echo/post/json", {
-      //     Id: 78912,
-      //     Customer: "Jason Sweet",
-      //     Quantity: 1,
-      //     Price: 18.0,
-      //   })
-      //   .then((res) => {
-      //     didpost = JSON.stringify(res.data);
-      //   })
-      //   .catch((err) => {
-      //     didpost = "An error occurred";
-      //   });
-
-      let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
-      await getRemoteData(url)
-        .then((response) => {
-          const data = JSON.parse(response);
-          // invocationName is a variable
-          //axios
-          axios
-            .post("https://reqbin.com/echo/post/json", {
-              Id: 78912,
-              Customer: "Jason Sweet",
-              Quantity: 1,
-              Price: 18.0,
-            })
-            .then((res) => {
-              // let didpost;
-
-              speechText = `hi werid text ${JSON.stringify(res.data)} and ${
-                data.name
-              }. You are registered with ${
-                data.email
-              }. How can i help your team?`;
-              didpost = JSON.stringify(res.data);
-            })
-            .catch((err) => {
-              speechText = "An error occurred";
-            });
-          // speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+      let didpost;
+      axios
+        .post("https://reqbin.com/echo/post/json", {
+          Id: 78912,
+          Customer: "Jason Sweet",
+          Quantity: 1,
+          Price: 18.0,
+        })
+        .then((res) => {
+          didpost = JSON.stringify(res.data);
+          speechText = didpost;
         })
         .catch((err) => {
-          speechText = err.message;
+          didpost = "An error occurred";
         });
+
+      let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
+      // await getRemoteData(url)
+      //   .then((response) => {
+      //     const data = JSON.parse(response);
+      //     // invocationName is a variable
+
+      //     speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+      //   })
+      //   .catch((err) => {
+      //     speechText = err.message;
+      //   });
       let say = `say open ${invocationName}`;
 
       return handlerInput.responseBuilder
