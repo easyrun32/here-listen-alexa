@@ -70,7 +70,7 @@ const LaunchRequest_Handler = {
     } else {
       let didpost;
       axios
-        .post("https://reqbin.com/echo/post/json", {
+        .post("https://reqbin.com/echo/post/jsons", {
           Id: 78912,
           Customer: "Jason Sweet",
           Quantity: 1,
@@ -78,7 +78,6 @@ const LaunchRequest_Handler = {
         })
         .then((res) => {
           didpost = "success";
-          speechText = didpost;
         })
         .catch((err) => {
           didpost = "failure";
