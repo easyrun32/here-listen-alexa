@@ -293,7 +293,7 @@ const GetPoop_Handler = {
     let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
     let say =
-      "Joe is mosquito joe and he was born in srycause ny where he lived with a lot of mosquitos. During his time he caught no fish and it was a huge disapointment to karen. ";
+      "Joe is mosquito joe and he was born in Syracuse ny where he lived with a lot of mosquitos. During his time he caught no fish and it was a huge disapointment to karen. ";
 
     return responseBuilder
       .speak(say)
