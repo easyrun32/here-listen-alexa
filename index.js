@@ -32,24 +32,25 @@ function getMemoryAttributes() {
 const maxHistorySize = 20; // remember only latest 20 intents
 
 // const LaunchRequest_Handler = require("./Handlers/launch-handler");
-// const getRemoteData = require("./helpers/getRemoteData");
+const { getRemoteData } = require("./helpers/getRemoteData");
+
 // 1. Intent Handlers =============================================
 
 // Helper
-const getRemoteData = function (url) {
-  return new Promise((resolve, reject) => {
-    const client = url.startsWith("https") ? require("https") : require("http");
-    const request = client.get(url, (response) => {
-      if (response.statusCode < 200 || response.statusCode > 299) {
-        reject(new Error("Failed with status code" + response.statusCode));
-      }
-      const body = [];
-      response.on("data", (chunk) => body.push(chunk));
-      response.on("end", () => resolve(body.join("")));
-    });
-    request.on("error", (err) => reject(err));
-  });
-};
+// const getRemoteData = function (url) {
+//   return new Promise((resolve, reject) => {
+//     const client = url.startsWith("https") ? require("https") : require("http");
+//     const request = client.get(url, (response) => {
+//       if (response.statusCode < 200 || response.statusCode > 299) {
+//         reject(new Error("Failed with status code" + response.statusCode));
+//       }
+//       const body = [];
+//       response.on("data", (chunk) => body.push(chunk));
+//       response.on("end", () => resolve(body.join("")));
+//     });
+//     request.on("error", (err) => reject(err));
+//   });
+// };
 
 //When Applications Opens
 //https://developer.amazon.com/blogs/post/Tx3CX1ETRZZ2NPC/Alexa-Account-Linking-5-Steps-to-Seamlessly-Link-Your-Alexa-Skill-with-Login-wit
@@ -88,7 +89,7 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-          speechText = `hi ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+          speechText = `hi testing remoteData ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
           speechText = err.message;
