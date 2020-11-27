@@ -77,7 +77,7 @@ const LaunchRequest_Handler = {
           Price: 18.0,
         })
         .then((res) => {
-          didpost = "true";
+          didpost = res.data;
         })
         .catch((err) => {
           didpost = "false";
