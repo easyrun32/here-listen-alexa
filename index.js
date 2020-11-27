@@ -31,9 +31,10 @@ function getMemoryAttributes() {
 
 const maxHistorySize = 20; // remember only latest 20 intents
 
-const { getRemoteData } = require("./helpers/getRemoteData");
+// const { getRemoteData } = require("./helpers/getRemoteData");
 
 const { LaunchRequest_Handler } = require("./Handlers/launch-handler");
+LaunchRequest_Handler();
 // 1. Intent Handlers =============================================
 
 // Helper
