@@ -77,11 +77,12 @@ const LaunchRequest_Handler = {
           Price: 18.0,
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(JSON.stringify(res.data) + " from the link SUCCESS");
           didpost = "success";
         })
         .catch((err) => {
-          console.log(err.data);
+          console.log(JSON.stringify(err.data) + " from the link failure");
+
           didpost = "failure";
         });
 
