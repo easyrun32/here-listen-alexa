@@ -77,7 +77,7 @@ const LaunchRequest_Handler = {
           Price: 18.0,
         })
         .then((res) => {
-          didpost = JSON.parse(res.data);
+          didpost = JSON.stringify(res.data);
         })
         .catch((err) => {
           didpost = "An error occurred";
