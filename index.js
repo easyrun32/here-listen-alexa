@@ -70,16 +70,18 @@ const LaunchRequest_Handler = {
     } else {
       let didpost;
       axios
-        .post("https://reqbin.com/echo/post/jsons", {
+        .post("https://reqbin.com/echo/post/json", {
           Id: 78912,
           Customer: "Jason Sweet",
           Quantity: 1,
           Price: 18.0,
         })
         .then((res) => {
+          console.log(res.data);
           didpost = "success";
         })
         .catch((err) => {
+          console.log(err.data);
           didpost = "failure";
         });
 
