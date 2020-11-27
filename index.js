@@ -77,24 +77,24 @@ const LaunchRequest_Handler = {
           Price: 18.0,
         })
         .then((res) => {
-          didpost = JSON.stringify(res.data);
+          didpost = "success";
           speechText = didpost;
         })
         .catch((err) => {
-          didpost = "An error occurred";
+          didpost = "failure";
         });
 
       let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
-      // await getRemoteData(url)
-      //   .then((response) => {
-      //     const data = JSON.parse(response);
-      //     // invocationName is a variable
+      await getRemoteData(url)
+        .then((response) => {
+          const data = JSON.parse(response);
+          // invocationName is a variable
 
-      //     speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
-      //   })
-      //   .catch((err) => {
-      //     speechText = err.message;
-      //   });
+          speechText = `hi you made a post request which was a ${didpost} ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+        })
+        .catch((err) => {
+          speechText = err.message;
+        });
       let say = `say open ${invocationName}`;
 
       return handlerInput.responseBuilder
