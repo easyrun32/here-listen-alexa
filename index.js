@@ -72,7 +72,7 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-          speechText = `hi testing remoteData ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+          speechText = `hi  ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
           speechText = err.message;
