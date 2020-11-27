@@ -26,6 +26,10 @@ jobs:
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
+          # This is the most important part.You create a key and value within the repo ->setting-> secret
+          # aws_region should be the aws lambda region
+          # Function_name is the name of the aws lambda function named you made in AWS website
+          # lastly it just bundles it into a zip file
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
