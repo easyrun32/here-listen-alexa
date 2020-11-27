@@ -82,10 +82,10 @@ const LaunchRequest_Handler = {
               Price: 18.0,
             })
             .then((res) => {
-              didpost = res.data;
+              didpost = "true";
             })
             .catch((err) => {
-              didpost = res.data;
+              didpost = "false";
             });
           speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
