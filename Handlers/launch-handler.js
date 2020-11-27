@@ -1,4 +1,4 @@
-const getRemoteData = require("../helpers/getRemoteData");
+const { getRemoteData } = require("../helpers/getRemoteData");
 const invocationName = "here listen";
 const LaunchRequest_Handler = {
   canHandle(handlerInput) {
@@ -34,7 +34,7 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-          speechText = `hi im testing ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+          speechText = `hi from handlers folder ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
           speechText = err.message;
