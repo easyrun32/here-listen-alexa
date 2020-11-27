@@ -80,7 +80,7 @@ const LaunchRequest_Handler = {
           didpost = JSON.parse(res.data);
         })
         .catch((err) => {
-          didpost = "false";
+          didpost = "An error occurred";
         });
 
       let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
