@@ -57,7 +57,6 @@ const LaunchRequest_Handler = {
 
     */
     // const { userId } = handlerInput.requestEnvelope.context.System.user;
-    let didpost;
 
     let speechText = "";
 
@@ -74,6 +73,7 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
+          let didpost;
           axios
             .post("https://reqbin.com/echo/post/json", {
               Id: 78912,
