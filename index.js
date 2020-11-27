@@ -68,25 +68,27 @@ const LaunchRequest_Handler = {
         .withLinkAccountCard()
         .getResponse();
     } else {
+      let didpost;
+      axios
+        .post("https://reqbin.com/echo/post/json", {
+          Id: 78912,
+          Customer: "Jason Sweet",
+          Quantity: 1,
+          Price: 18.0,
+        })
+        .then((res) => {
+          didpost = "true";
+        })
+        .catch((err) => {
+          didpost = "false";
+        });
+
       let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
       await getRemoteData(url)
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-          let didpost;
-          axios
-            .post("https://reqbin.com/echo/post/json", {
-              Id: 78912,
-              Customer: "Jason Sweet",
-              Quantity: 1,
-              Price: 18.0,
-            })
-            .then((res) => {
-              didpost = "true";
-            })
-            .catch((err) => {
-              didpost = "false";
-            });
+
           speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
