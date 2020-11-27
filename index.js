@@ -2,7 +2,7 @@ const Alexa = require("ask-sdk-core");
 const https = require("https");
 //testing from github
 const invocationName = "here listen";
-
+const axios = require("axios");
 function getMemoryAttributes() {
   const memoryAttributes = {
     history: [],
@@ -57,6 +57,21 @@ const LaunchRequest_Handler = {
 
     */
     // const { userId } = handlerInput.requestEnvelope.context.System.user;
+    let didpost;
+    axios
+      .post("/", {
+        Id: 78912,
+        Customer: "Jason Sweet",
+        Quantity: 1,
+        Price: 18.0,
+      })
+      .then((res) => {
+        didpost = res.data;
+      })
+      .catch((err) => {
+        didpost = res.data;
+      });
+
     let speechText = "";
 
     if (!accessToken) {
@@ -72,7 +87,7 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-          speechText = `hi  ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+          speechText = `hi werid text ${didpost} and ${data.name}. You are registered with ${data.email}. How can i help your team?`;
         })
         .catch((err) => {
           speechText = err.message;
