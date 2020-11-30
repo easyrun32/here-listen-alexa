@@ -49,14 +49,6 @@ const LaunchRequest_Handler = {
       accessToken,
       userId,
     } = handlerInput.requestEnvelope.context.System.user;
-    /*
-    post is user registered?
-
-    if yes then make a post request to see if they exist if they do  dont do anything
-    if no then make a post request and register them
-
-    */
-    // const { userId } = handlerInput.requestEnvelope.context.System.user;
 
     let speechText = "";
 
@@ -69,22 +61,6 @@ const LaunchRequest_Handler = {
         .getResponse();
     } else {
       let didpost;
-      axios
-        .post("https://reqbin.com/echo/post/json", {
-          Id: 78912,
-          Customer: "Jason Sweet",
-          Quantity: 1,
-          Price: 18.0,
-        })
-        .then((res) => {
-          console.log(JSON.stringify(res.data) + " from the link SUCCESS");
-          didpost = "success";
-        })
-        .catch((err) => {
-          console.log(JSON.stringify(err.data) + " from the link failure");
-
-          didpost = "failure";
-        });
 
       let url = `https://api.amazon.com/user/profile?access_token=${accessToken}`;
       await getRemoteData(url)
@@ -92,7 +68,34 @@ const LaunchRequest_Handler = {
           const data = JSON.parse(response);
           // invocationName is a variable
 
-          speechText = `hi you made a post request which was a ${didpost} ${data.name}. You are registered with ${data.email}. How can i help your team?`;
+          speechText = `hi ${data.name}. You are registered with ${data.email}.`;
+        })
+        .then(() => {
+          /*
+    post is user registered?
+
+    if yes then make a post request to see if they exist if they do  dont do anything
+    if no then make a post request and register them
+
+    */
+          // const { userId } = handlerInput.requestEnvelope.context.System.user;
+          axios
+            .post("https://reqbin.com/echo/post/json", {
+              Id: 78912,
+              Customer: "Jason Sweet",
+              Quantity: 1,
+              Price: 18.0,
+            })
+            .then((res) => {
+              console.log(
+                JSON.stringify(res.data) +
+                  `post request success: variable ${userId}`
+              );
+              didpost = "success";
+            })
+            .catch((err) => {
+              console.log(JSON.stringify(err.data) + "post request failure");
+            });
         })
         .catch((err) => {
           speechText = err.message;
