@@ -67,7 +67,6 @@ const LaunchRequest_Handler = {
         .then((response) => {
           const data = JSON.parse(response);
           // invocationName is a variable
-
           speechText = `hi ${data.name}. You are registered with ${data.email}.`;
         })
         .then(() => {
@@ -280,28 +279,6 @@ const GetPriceOfBeer_Handler = {
     } else {
       say = `what the hell are you saying?. Maybe you are too drunk`;
     }
-
-    return responseBuilder
-      .speak(say)
-      .reprompt("try again, " + say)
-      .getResponse();
-  },
-};
-
-const GetPoop_Handler = {
-  canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return (
-      request.type === "IntentRequest" && request.intent.name === "GetPoop"
-    );
-  },
-  handle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    const responseBuilder = handlerInput.responseBuilder;
-    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-
-    let say =
-      "Joe is mosquito joe and he was born in Syracuse ny where he lived with a lot of mosquitos. During his time he caught no fish and it was a huge disapointment to karen. ";
 
     return responseBuilder
       .speak(say)
@@ -707,6 +684,49 @@ const ResponsePersistenceInterceptor = {
   },
 };
 
+const MakePost_Handler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return (
+      request.type === "IntentRequest" && request.intent.name === "MakePost"
+    );
+  },
+  handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const responseBuilder = handlerInput.responseBuilder;
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+    let say = "Making a post to";
+
+    return responseBuilder
+      .speak(say)
+      .reprompt("try again, " + say)
+      .getResponse();
+  },
+};
+
+const GetPoop_Handler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return (
+      request.type === "IntentRequest" && request.intent.name === "GetPoop"
+    );
+  },
+  handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const responseBuilder = handlerInput.responseBuilder;
+    let sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+    let say =
+      "Joe is mosquito joe and he was born in Syracuse ny where he lived with a lot of mosquitos. During his time he caught no fish and it was a huge disapointment to karen. ";
+
+    return responseBuilder
+      .speak(say)
+      .reprompt("try again, " + say)
+      .getResponse();
+  },
+};
+
 // 4. Exports handler function and setup ===================================================
 //const skillBuilder = Alexa.SkillBuilders.standard();
 const skillBuilder = Alexa.SkillBuilders.custom();
@@ -721,6 +741,7 @@ exports.handler = skillBuilder
     GetClosingTime_Handler,
     GetPriceOfBeer_Handler,
     GetPoop_Handler,
+    MakePost_Handler,
     LaunchRequest_Handler,
     SessionEndedHandler
   )
